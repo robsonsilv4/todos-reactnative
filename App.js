@@ -1,4 +1,11 @@
-import { Alert, FlatList, StyleSheet, View } from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Keyboard,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import React, { useState } from 'react';
 
 import AddTodo from './components/AddTodo';
@@ -35,21 +42,28 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <AddTodo submitHandler={submitHandler} />
-        <View style={styles.list}>
-          <FlatList
-            data={todos}
-            keyExtractor={todo => todo.id}
-            renderItem={({ item }) => (
-              <TodoItem item={item} onPress={pressHandler} />
-            )}
-          />
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+        console.log('Saí teclado!');
+      }}
+    >
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <AddTodo submitHandler={submitHandler} />
+          <View style={styles.list}>
+            <FlatList
+              data={todos}
+              keyExtractor={todo => todo.id}
+              renderItem={({ item }) => (
+                <TodoItem item={item} onPress={pressHandler} />
+              )}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
