@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 
 import Header from './components/Header';
+import TodoItem from './components/TodoItem';
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -12,6 +13,12 @@ export default function App() {
     { id: 5, text: 'Estudar Redux' },
   ]);
 
+  const pressHandler = id => {
+    setTodos(prevTodos => {
+      return prevTodos.filter(todo => todo.id !== id);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Header />
@@ -21,7 +28,9 @@ export default function App() {
           <FlatList
             data={todos}
             keyExtractor={todo => todo.id}
-            renderItem={({ item }) => <Text>{item.text}</Text>}
+            renderItem={({ item }) => (
+              <TodoItem item={item} onPress={pressHandler} />
+            )}
           />
         </View>
       </View>
