@@ -1,6 +1,7 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 
+import AddTodo from './components/AddTodo';
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
 
@@ -19,11 +20,17 @@ export default function App() {
     });
   };
 
+  const submitHandler = text => {
+    setTodos(prevTodos => {
+      return [...prevTodos, { text, id: todos.length + 1 }]; // UUID
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        {/* form */}
+        <AddTodo submitHandler={submitHandler} />
         <View style={styles.list}>
           <FlatList
             data={todos}
