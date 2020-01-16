@@ -15,7 +15,7 @@ import TodoItem from './components/TodoItem';
 export default function App() {
   const [todos, setTodos] = useState([
     { id: 1, text: 'Estudar CSS' },
-    { id: 2, text: 'Estudar FlexBox' },
+    { id: 2, text: 'Estudar Flexbox' },
     { id: 3, text: 'Estudar React' },
     { id: 4, text: 'Estudar React Native' },
     { id: 5, text: 'Estudar Redux' },
