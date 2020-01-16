@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 
 import AddTodo from './components/AddTodo';
@@ -21,9 +21,17 @@ export default function App() {
   };
 
   const submitHandler = text => {
-    setTodos(prevTodos => {
-      return [...prevTodos, { text, id: todos.length + 1 }]; // UUID
-    });
+    if (text.length > 3) {
+      setTodos(prevTodos => {
+        return [...prevTodos, { text, id: todos.length + 1 }]; // UUID
+      });
+    } else {
+      Alert.alert(
+        'Deu ruim!',
+        'As tarefas precisam ter no mínimo 3 caracteres.',
+        [{ text: 'Entendi', onPress: () => console.log('Alerta fechado.') }]
+      );
+    }
   };
 
   return (
